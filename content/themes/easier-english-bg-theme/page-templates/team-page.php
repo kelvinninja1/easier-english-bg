@@ -36,15 +36,23 @@ get_header(); ?>
                     'fields'       => 'all',
                     'who'          => ''
                 );
-                $all_users = get_users( $args );
+                $all_users = get_users($args);
 
-                foreach ( $all_users as $user ) {
-                    $user_display_name = esc_html($user->display_name);
+                foreach ($all_users as $user) {
+                    /**
+                     * Skip the generic team account and move on.
+                     * Sadly, he is not a real person :)
+                     */
+                    if ($user->user_email === 'team@easierenglish.bg') {
+                        continue;
+                    }
+
+                    $user_name = esc_html($user->display_name);
 
                     echo '<div class="team_card group">';
 
                     // Linked-in URL
-                    echo '<a class="personal_linked" title="' . $user_display_name . ' в LinkedIn" href="' . $user->user_url . '" target="_blank">' . $user_display_name . ' в LinkedIn</a>';
+                    echo '<a class="personal_linked" title="' . $user_name . ' в LinkedIn" href="' . $user->user_url . '" target="_blank">' . $user_name . ' в LinkedIn</a>';
 
 
                     /**
@@ -66,13 +74,13 @@ get_header(); ?>
                         $user_avatar_url = "//www.gravatar.com/avatar/" . $author_email_md5 . "?s=240";
                     }
 
-                    echo '<img src="' . $user_avatar_url . '" alt="' . $user_display_name . ', учител в EasierEnglish" width="200" height="200" />';
+                    echo '<img src="' . $user_avatar_url . '" alt="' . $user_name . ', учител в EasierEnglish" width="200" height="200" />';
 
 
                     /**
                      * Display teacher name and lessons count
                      */
-                    echo '<h2>' . $user_display_name . '</h2>';
+                    echo '<h2>' . $user_name . '</h2>';
                     echo '<h3>Учител в EasierEnglish.BG';
 
                     $user_posts_count = count_user_posts($user->ID);
