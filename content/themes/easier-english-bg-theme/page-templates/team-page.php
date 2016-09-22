@@ -24,24 +24,37 @@ get_header(); ?>
                 $team_members = [];
 
                 // Mark these as special
-                $specialUsersIds = [
+                $foundersIds = [
                     1, // That's our co-founder, Kalo
                     7 // That's the other one, Stoyan
                 ];
-                foreach ($specialUsersIds as $user_id) {
+                // Our designers, have no posts, but display them
+                $designersIds = [
+                    17, // Petya
+                    18 // Alex
+                ];
+
+                foreach ($foundersIds as $user_id) {
                     array_push(
                         $team_members,
                         get_user_by('id', $user_id)
                     );
                 }
 
-                $teachers_query = array(
+                $teachers_filter = array(
                     'orderby'      => 'post_count',
                     'order'        => 'DSC',
-                    'exclude'      => $specialUsersIds
+                    'exclude'      => array_merge($foundersIds, $designersIds)
                 );
-                $all_teachers = get_users($teachers_query);
+                $all_teachers = get_users($teachers_filter);
                 $team_members = array_merge($team_members, $all_teachers);
+
+                foreach ($designersIds as $user_id) {
+                    array_push(
+                        $team_members,
+                        get_user_by('id', $user_id)
+                    );
+                }
 
                 foreach ($team_members as $user) {
                     /**
@@ -54,21 +67,27 @@ get_header(); ?>
 
                     /**
                      * Skip teachers without any posts,
-                     * except the two founders. They are special :D
+                     * except the two founders + designers. They are special :D
                      */
-                    $isUserSpecial = in_array($user->ID, $specialUsersIds);
+                    $isUserFounder = in_array($user->ID, $foundersIds);
+                    $isUserDesigner = in_array($user->ID, $designersIds);
                     $user_posts_count = count_user_posts($user->ID);
-                    if ($user_posts_count == 0 && ! $isUserSpecial) {
+                    if (
+                        $user_posts_count == 0
+                        && ! $isUserFounder
+                        && ! $isUserDesigner
+                    ) {
                        continue;
                     }
 
                     $user_name = esc_html($user->display_name);
 
-                    echo '<div class="team_card group pb--lg" itemprop="' . ( $isUserSpecial ? 'founders' : 'employee' ) . '" itemscope="" itemtype="http://schema.org/Person">';
+                    echo '<div class="team_card group pb--lg" itemprop="' . ( $isUserFounder ? 'founders' : 'employee' ) . '" itemscope="" itemtype="http://schema.org/Person">';
 
                     // Linked-in URL
-                    echo '<a class="personal_linked" title="' . $user_name . ' в LinkedIn" href="' . $user->user_url . '" target="_blank">' . $user_name . ' в LinkedIn</a>';
-
+                    if ($user->user_url) {
+                        echo '<a class="personal_linked" title="' . $user_name . ' в LinkedIn" href="' . $user->user_url . '" target="_blank">' . $user_name . ' в LinkedIn</a>';
+                    }
 
                     /**
                      * Get teacher photo via the Google+ API,
@@ -95,10 +114,14 @@ get_header(); ?>
                      * Display teacher name, lessons count
                      * and attach a link to teacher portfolio
                      */
-                    if ($isUserSpecial) {
+                    if ($isUserFounder) {
                         echo '<h2 class="author-card__title p0" itemprop="name">' . $user_name;
                         echo '<em>, съосновател на EasierEnglish.BG</em></h2>';
-                    } else {
+                    } elseif ($isUserDesigner) {
+                        echo '<h2 class="author-card__title p0" itemprop="name">' . $user_name;
+                        echo '<em>, графичен дизайнер в EasierEnglish.BG</em></h2>';
+                    }
+                    else {
                         $user_portfolio_url = get_author_posts_url($user->ID);
                         echo '<h2 class="author-card__title p0"><a itemprop="name" href="' . $user_portfolio_url . '">' . $user_name . '</a>';
                         echo '<em>, <span itemprop="jobTitle">учител в EasierEnglish.BG</span>';
