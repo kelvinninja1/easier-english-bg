@@ -14,6 +14,8 @@ get_header(); ?>
     <div id="primary" class="site-content">
         <div id="content" role="main">
 
+            <h1 class="text-uppercase"><?php the_title(); ?></h1>
+
             <?php
                 /**
                  * Build an array with all team members,
@@ -106,8 +108,8 @@ get_header(); ?>
                         echo '</a></em></h2>';
                     }
 
-                    $autor_bio = get_the_author_meta('description', $user->ID);
-                    echo '<p>' . nl2br($autor_bio) . '</p>';
+                    $$author_bio = get_the_author_meta('description', $user->ID);
+                    echo '<p>' . nl2br($$author_bio) . '</p>';
 
                     echo '</div>';
                 }
