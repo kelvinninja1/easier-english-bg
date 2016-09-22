@@ -15,13 +15,33 @@ get_header(); ?>
         <div id="content" role="main">
 
             <?php
-                $args = array(
-                    'orderby'      => 'post_count',
-                    'order'        => 'DSC'
-                );
-                $all_users = get_users($args);
+                /**
+                 * Build an array with all team members,
+                 * starting with the founders.
+                 */
+                $team_members = [];
 
-                foreach ($all_users as $user) {
+                // Mark these as special
+                $specialUsersIds = [
+                    1, // That's our co-founder, Kalo
+                    7 // That's the other one, Stoyan
+                ];
+                foreach ($specialUsersIds as $user_id) {
+                    array_push(
+                        $team_members,
+                        get_user_by('id', $user_id)
+                    );
+                }
+
+                $teachers_query = array(
+                    'orderby'      => 'post_count',
+                    'order'        => 'DSC',
+                    'exclude'      => $specialUsersIds
+                );
+                $all_teachers = get_users($teachers_query);
+                $team_members = array_merge($team_members, $all_teachers);
+
+                foreach ($team_members as $user) {
                     /**
                      * Skip the generic team account and move on.
                      * Sadly, he is not a real person :)
@@ -34,11 +54,10 @@ get_header(); ?>
                      * Skip teachers without any posts,
                      * except the two founders. They are special :D
                      */
-                    $specialUsers = ['kaloyan.kosev@easierenglish.bg', 'stoyan.panayotov@easierenglish.bg'];
-                    $isUserSpecial = in_array($user->user_email, $specialUsers);
+                    $isUserSpecial = in_array($user->ID, $specialUsersIds);
                     $user_posts_count = count_user_posts($user->ID);
                     if ($user_posts_count == 0 && ! $isUserSpecial) {
-                        continue;
+                       continue;
                     }
 
                     $user_name = esc_html($user->display_name);
@@ -76,7 +95,7 @@ get_header(); ?>
                      */
                     if ($isUserSpecial) {
                         echo '<h2>' . $user_name . '</h2>';
-                        echo '<h3>Съосновател на EasierEnglish.BG';
+                        echo '<h3>Съосновател на EasierEnglish.BG</h3>';
                     } else {
                         $user_portfolio_url = get_author_posts_url($user->ID);
                         echo '<h2><a href="' . $user_portfolio_url . '">' . $user_name . '</a></h2>';
