@@ -17,6 +17,7 @@ $padding-default: 15px;
 .pt    { padding-top:      $padding-default !important; }
 .pr    { padding-right:    $padding-default !important; }
 .pb    { padding-bottom:   $padding-default !important; }
+.pb--lg { padding-bottom:   $padding-default * 2 !important; }
 .pl    { padding-left:     $padding-default !important; }
 .ph    { padding-right:    $padding-default !important; padding-left:    $padding-default !important; }
 .pv    { padding-top:      $padding-default !important; padding-bottom:  $padding-default !important; }

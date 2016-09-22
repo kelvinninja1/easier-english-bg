@@ -62,7 +62,7 @@ get_header(); ?>
 
                     $user_name = esc_html($user->display_name);
 
-                    echo '<div class="team_card group">';
+                    echo '<div class="team_card group pb--lg">';
 
                     // Linked-in URL
                     echo '<a class="personal_linked" title="' . $user_name . ' в LinkedIn" href="' . $user->user_url . '" target="_blank">' . $user_name . ' в LinkedIn</a>';
@@ -94,16 +94,16 @@ get_header(); ?>
                      * and attach a link to teacher portfolio
                      */
                     if ($isUserSpecial) {
-                        echo '<h2>' . $user_name . '</h2>';
-                        echo '<h3>Съосновател на EasierEnglish.BG</h3>';
+                        echo '<h2 class="author-card__title p0">' . $user_name;
+                        echo '<em>, съосновател на EasierEnglish.BG</em></h2>';
                     } else {
                         $user_portfolio_url = get_author_posts_url($user->ID);
-                        echo '<h2><a href="' . $user_portfolio_url . '">' . $user_name . '</a></h2>';
-                        echo '<h3>Учител в EasierEnglish.BG';
+                        echo '<h2 class="author-card__title p0"><a href="' . $user_portfolio_url . '">' . $user_name . '</a>';
+                        echo '<em>, учител в EasierEnglish.BG';
                         echo '<a href="' . get_author_posts_url($user->ID) .'">';
                         echo ', ' . $user_posts_count . ' ';
                         echo $user_posts_count == 1 ? 'урок' : 'урока';
-                        echo '</a></h3>';
+                        echo '</a></em></h2>';
                     }
 
                     $autor_bio = the_author_meta('description', $user->ID);
