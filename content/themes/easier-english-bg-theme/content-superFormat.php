@@ -133,6 +133,8 @@
         <footer class="entry-meta">
             <?php edit_post_link( __( 'Edit', 'twentytwelve' ), '<span class="edit-link">', '</span>' ); ?>
 
+            <?php // TODO: Refactor, duplicated logic with team-page.php ?>
+
             <?php if (strlen(get_the_author_meta('description')) > 0) { ?>
                 <div class="author-card group">
                     <?php if( isset($author_linkedin) ) echo '<a class="profile-image-link" title="'. $author_name .' в LinkedIn" href='. $author_linkedin . ' target="_blank">'; ?>
