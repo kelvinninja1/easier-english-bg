@@ -47,13 +47,40 @@ get_header(); ?>
             if ( get_the_author_meta( 'description' ) ) : ?>
             <div class="author-info">
                 <div class="author-avatar">
-                    <?php echo get_avatar( get_the_author_meta( 'user_email' ), apply_filters( 'twentytwelve_author_bio_avatar_size', 200 ) ); ?>
+
+                    <?php
+                    // TODO: Refactor: Duplicated logic with team-page.php
+
+                    /**
+                     * Get teacher photo via the Google+ API,
+                     * or fallback to Gravatar.
+                     */
+                    $googlePlusApiKey = 'AIzaSyCj4CItxsT4pF15t3BOk86bK8r5LyglyQg';
+                    $googlePlusUrl = get_the_author_meta('googleplus');
+                    $googlePlusId = str_replace('https://plus.google.com/', '', $googlePlusUrl);
+
+                    $google_profile_json = file_get_contents('https://www.googleapis.com/plus/v1/people/' . $googlePlusId . '?fields=image&key=' . $googlePlusApiKey);
+                    $google_profile_json = json_decode($google_profile_json, true);
+                    $user_avatar_url = $google_profile_json["image"]["url"];
+
+                    if (isset($user_avatar_url)) {
+                        $user_avatar_url = str_replace("sz=50", "sz=240", $user_avatar_url);
+                    } else {
+                        $author_email_md5 = md5(strtolower(trim( get_the_author_meta('user_email') )));
+                        $user_avatar_url = "//www.gravatar.com/avatar/" . $author_email_md5 . "?s=240";
+                    }
+
+                    echo '<img class="avatar avatar-200 photo" src="' . $user_avatar_url . '" alt="' . $user_name . ', учител в EasierEnglish" width="200" height="200" />';
+
+                    ?>
+
+
                 </div><!-- .author-avatar -->
                 <div class="author-description">
                     <?php
-                    $the_author_description = apply_filters("the_content", get_the_author_meta('description'));
+                        $author_bio = get_the_author_meta('description');
+                        echo '<p>' . nl2br($author_bio) . '</p>';
                     ?>
-                    <p><?= $the_author_description; ?></p>
                 </div><!-- .author-description  -->
             </div><!-- .author-info -->
             <?php endif; ?>
