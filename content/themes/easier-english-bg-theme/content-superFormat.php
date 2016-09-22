@@ -133,6 +133,8 @@
         <footer class="entry-meta">
             <?php edit_post_link( __( 'Edit', 'twentytwelve' ), '<span class="edit-link">', '</span>' ); ?>
 
+            <?php // TODO: Refactor, duplicated logic with team-page.php ?>
+
             <?php if (strlen(get_the_author_meta('description')) > 0) { ?>
                 <div class="author-card group">
                     <?php if( isset($author_linkedin) ) echo '<a class="profile-image-link" title="'. $author_name .' в LinkedIn" href='. $author_linkedin . ' target="_blank">'; ?>
@@ -148,7 +150,7 @@
                         }
                     ?>
                     <h5><?= get_the_author() . ", <a target='_blank' href=" . get_author_posts_url( get_the_author_meta( 'ID' ) ) . ">" . $author_posts . "</a>"; ?></h5>
-                    <p><?= get_the_author_meta('description'); ?></p>
+                    <p><?= nl2br(get_the_author_meta('description')); ?></p>
                 </div>
             <?php } ?>
 
