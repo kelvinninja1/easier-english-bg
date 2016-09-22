@@ -16,25 +16,8 @@ get_header(); ?>
 
             <?php
                 $args = array(
-                    'blog_id'      => $GLOBALS['blog_id'],
-                    'role'         => '',
-                    'role__in'     => array(),
-                    'role__not_in' => array(),
-                    'meta_key'     => '',
-                    'meta_value'   => '',
-                    'meta_compare' => '',
-                    'meta_query'   => array(),
-                    'date_query'   => array(),
-                    'include'      => array(),
-                    'exclude'      => array(),
                     'orderby'      => 'post_count',
-                    'order'        => 'DSC',
-                    'offset'       => '',
-                    'search'       => '',
-                    'number'       => '',
-                    'count_total'  => false,
-                    'fields'       => 'all',
-                    'who'          => ''
+                    'order'        => 'DSC'
                 );
                 $all_users = get_users($args);
 
@@ -48,10 +31,13 @@ get_header(); ?>
                     }
 
                     /**
-                     * Skip teachers without any posts
+                     * Skip teachers without any posts,
+                     * except the two founders. They are special :D
                      */
+                    $specialUsers = ['kaloyan.kosev@easierenglish.bg', 'stoyan.panayotov@easierenglish.bg'];
+                    $isUserSpecial = in_array($user->user_email, $specialUsers);
                     $user_posts_count = count_user_posts($user->ID);
-                    if ($user_posts_count == 0) {
+                    if ($user_posts_count == 0 && ! $isUserSpecial) {
                         continue;
                     }
 
@@ -84,18 +70,22 @@ get_header(); ?>
 
                     echo '<img src="' . $user_avatar_url . '" alt="' . $user_name . ', учител в EasierEnglish" width="200" height="200" />';
 
-
                     /**
                      * Display teacher name, lessons count
                      * and attach a link to teacher portfolio
                      */
-                    $user_portfolio_url = get_author_posts_url($user->ID);
-                    echo '<h2><a href="' . $user_portfolio_url . '">' . $user_name . '</a></h2>';
-                    echo '<h3>Учител в EasierEnglish.BG';
-                    echo '<a href="' . get_author_posts_url($user->ID) .'">';
-                    echo ', ' . $user_posts_count . ' ';
-                    echo $user_posts_count == 1 ? 'урок' : 'урока';
-                    echo '</a></h3>';
+                    if ($isUserSpecial) {
+                        echo '<h2>' . $user_name . '</h2>';
+                        echo '<h3>Съосновател на EasierEnglish.BG';
+                    } else {
+                        $user_portfolio_url = get_author_posts_url($user->ID);
+                        echo '<h2><a href="' . $user_portfolio_url . '">' . $user_name . '</a></h2>';
+                        echo '<h3>Учител в EasierEnglish.BG';
+                        echo '<a href="' . get_author_posts_url($user->ID) .'">';
+                        echo ', ' . $user_posts_count . ' ';
+                        echo $user_posts_count == 1 ? 'урок' : 'урока';
+                        echo '</a></h3>';
+                    }
 
                     $autor_bio = the_author_meta('description', $user->ID);
                     echo '<p>' . nl2br($autor_bio) . '</p>';
