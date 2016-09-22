@@ -86,14 +86,16 @@ get_header(); ?>
 
 
                     /**
-                     * Display teacher name and lessons count
+                     * Display teacher name, lessons count
+                     * and attach a link to teacher portfolio
                      */
-                    echo '<h2>' . $user_name . '</h2>';
+                    $user_portfolio_url = get_author_posts_url($user->ID);
+                    echo '<h2><a href="' . $user_portfolio_url . '">' . $user_name . '</a></h2>';
                     echo '<h3>Учител в EasierEnglish.BG';
-                    echo ', <em><strong>' . $user_posts_count . ' ';
+                    echo '<a href="' . get_author_posts_url($user->ID) .'">';
+                    echo ', ' . $user_posts_count . ' ';
                     echo $user_posts_count == 1 ? 'урок' : 'урока';
-                    echo '</strong></em>';
-                    echo '</h3>';
+                    echo '</a></h3>';
 
                     $autor_bio = the_author_meta('description', $user->ID);
                     echo '<p>' . nl2br($autor_bio) . '</p>';
