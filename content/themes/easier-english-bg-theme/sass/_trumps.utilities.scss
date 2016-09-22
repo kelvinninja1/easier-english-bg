@@ -29,3 +29,7 @@ $padding-default: 15px;
 .pl0   { padding-left:     0 !important; }
 .ph0   { padding-right:    0 !important; padding-left:     0 !important; }
 .pv0   { padding-top:      0 !important; padding-bottom:   0 !important; }
+
+.text-uppercase {
+    text-transform: uppercase !important;
+}
