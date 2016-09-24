@@ -94,10 +94,22 @@ get_header(); ?>
                      * or fallback to Gravatar.
                      */
                     $googlePlusApiKey = 'AIzaSyCj4CItxsT4pF15t3BOk86bK8r5LyglyQg';
+                    $google_profile_json_url = '';
                     $googlePlusUrl = get_the_author_meta('googleplus', $user->ID);
-                    $googlePlusId = str_replace('https://plus.google.com/', '', $googlePlusUrl);
-
-                    $google_profile_json = file_get_contents('https://www.googleapis.com/plus/v1/people/' . $googlePlusId . '?fields=image&key=' . $googlePlusApiKey);
+                    if ($googlePlusUrl) {
+                        $googlePlusId = str_replace('https://plus.google.com/', '', $googlePlusUrl);
+                        $google_profile_json_url = 'https://www.googleapis.com/plus/v1/people/' . $googlePlusId . '?fields=image&key=' . $googlePlusApiKey;
+                    }
+                    /**
+                     * TODO: Find out a way to do this fromt the server-side
+                     * without hitting a 500 error on the server.
+                     *
+                     * Until I find out a solution, the workaround is
+                     * to get user Google Plus profile photo on the front-end,
+                     * pulling it from the data-google-plus-url attribute.
+                     */
+                    /**
+                    $google_profile_json = file_get_contents($google_profile_json_url);
                     $google_profile_json = json_decode($google_profile_json, true);
                     $user_avatar_url = $google_profile_json["image"]["url"];
 
@@ -107,8 +119,12 @@ get_header(); ?>
                         $author_email_md5 = md5(strtolower(trim( $user->user_email )));
                         $user_avatar_url = "//www.gravatar.com/avatar/" . $author_email_md5 . "?s=240";
                     }
+                    */
+                    $author_email_md5 = md5(strtolower(trim( $user->user_email )));
+                    $user_avatar_url = "//www.gravatar.com/avatar/" . $author_email_md5 . "?s=240";
 
-                    echo '<img itemprop="image" src="' . $user_avatar_url . '" alt="' . $user_name . ', учител в EasierEnglish" width="200" height="200" />';
+                    echo '<img data-google-plus-url="' . $google_profile_json_url . '" itemprop="image" src="' . $user_avatar_url . '" alt="' . $user_name . ', учител в EasierEnglish" width="200" height="200" />';
+
 
                     /**
                      * Display teacher name, lessons count

@@ -8,6 +8,29 @@ $(document).ready(function(){
 
 
 	/**
+	 * If google plus profile url is provided,
+	 * fetch the profile image and set it as image src.
+	 */
+	$userGooglePlusUrls = $('[data-google-plus-url]');
+	if ($userGooglePlusUrls.length) {
+		$userGooglePlusUrls.each(function(index, el){
+			var $el = $(el);
+			var googlePlusUrl = $el.data('google-plus-url');
+			if (googlePlusUrl.length) {
+				$.getJSON(
+					googlePlusUrl,
+					function(data) {
+						var imgUrl = data.image.url;
+						imgUrl = imgUrl.replace('sz=50', 'sz=200');
+						$el.attr('src', imgUrl);
+					}
+				);
+			}
+		});
+	}
+
+
+	/**
 	 * Dead-simple feedback / social share form,
 	 * based on the user input.
 	 */
