@@ -330,7 +330,7 @@ body .site {
     color: #111;
 }
 .sub-menu {
-    height: 0;
+    max-height: 0;
     overflow: hidden;
     position: absolute;
     top: 80px;
@@ -341,12 +341,13 @@ body .site {
     border-bottom: 2px solid #a5a5a5;
     border-left: 2px solid #a5a5a5;
     border-right: 2px solid #a5a5a5;
-    -webkit-transition: all 0.2s ease-out;
-    -moz-transition: all 0.2s ease-out;
-    -o-transition: all 0.2s ease-out;
+    transition: all 0.2s ease-out;
 }
-.nav-menu > li:nth-child(2):hover .sub-menu {
-    height: 321px;
+.nav-menu > li:nth-child(2):hover {
+    cursor: default;
+    .sub-menu {
+        max-height: 321px;
+    }
 }
 .sub-menu > li {
     list-style: none;
