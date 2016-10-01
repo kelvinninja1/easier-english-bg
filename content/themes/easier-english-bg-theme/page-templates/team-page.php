@@ -96,7 +96,7 @@ get_header(); ?>
                     $template_url = get_bloginfo('template_directory');
                     $profile_img = get_the_author_meta('profile-img', $user->ID);
                     $image = $template_url . '/img/' .
-                        (empty($profile_img) ? 'EasierEnglish_logo_big.png' : $profile_img);
+                        (empty($profile_img) ? 'team/generic.jpg' : $profile_img);
 
                     echo '<img itemprop="image" src="' . $image . '" alt="' . $user_name . ', учител в EasierEnglish" width="200" height="200" />';
 
