@@ -121,8 +121,8 @@ get_header(); ?>
                         echo '</a></em></h2>';
                     }
 
-                    $$author_bio = get_the_author_meta('description', $user->ID);
-                    echo '<p>' . nl2br($$author_bio) . '</p>';
+                    $author_bio = get_the_author_meta('description', $user->ID);
+                    echo '<p>' . nl2br($author_bio) . '</p>';
 
                     echo '</div>';
                 }
