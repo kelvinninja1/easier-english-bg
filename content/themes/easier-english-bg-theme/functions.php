@@ -707,7 +707,7 @@ add_filter( 'wp_calculate_image_srcset', 'ssl_srcset' );
  * https://davidwalsh.name/add-profile-fields
  */
 function modify_contact_methods($profile_fields) {
-    $profile_fields['img'] = 'Profile Image Url';
+    $profile_fields['profile-img'] = 'Profile Image Url';
 
     return $profile_fields;
 }
