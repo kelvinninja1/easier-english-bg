@@ -90,25 +90,15 @@ get_header(); ?>
                     }
 
                     /**
-                     * Get teacher photo via the Google+ API,
-                     * or fallback to Gravatar.
+                     * Get teacher photo via the user profile custom field,
+                     * or fallback to a generic photo.
                      */
-                    $googlePlusApiKey = 'AIzaSyCj4CItxsT4pF15t3BOk86bK8r5LyglyQg';
-                    $googlePlusUrl = get_the_author_meta('googleplus', $user->ID);
-                    $googlePlusId = str_replace('https://plus.google.com/', '', $googlePlusUrl);
+                    $template_url = get_bloginfo('template_directory');
+                    $profile_img = get_the_author_meta('profile-img', $user->ID);
+                    $image = $template_url . '/img/' .
+                        (empty($profile_img) ? 'team/generic.jpg' : $profile_img);
 
-                    $google_profile_json = file_get_contents('https://www.googleapis.com/plus/v1/people/' . $googlePlusId . '?fields=image&key=' . $googlePlusApiKey);
-                    $google_profile_json = json_decode($google_profile_json, true);
-                    $user_avatar_url = $google_profile_json["image"]["url"];
-
-                    if (isset($user_avatar_url)) {
-                        $user_avatar_url = str_replace("sz=50", "sz=240", $user_avatar_url);
-                    } else {
-                        $author_email_md5 = md5(strtolower(trim( $user->user_email )));
-                        $user_avatar_url = "//www.gravatar.com/avatar/" . $author_email_md5 . "?s=240";
-                    }
-
-                    echo '<img itemprop="image" src="' . $user_avatar_url . '" alt="' . $user_name . ', учител в EasierEnglish" width="200" height="200" />';
+                    echo '<img itemprop="image" src="' . $image . '" alt="' . $user_name . ', учител в EasierEnglish" width="200" height="200" />';
 
                     /**
                      * Display teacher name, lessons count
