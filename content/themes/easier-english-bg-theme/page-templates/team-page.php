@@ -21,18 +21,18 @@ get_header(); ?>
                  * Build an array with all team members,
                  * starting with the founders.
                  */
-                $team_members = [];
+                $team_members = array();
 
                 // Mark these as special
-                $foundersIds = [
+                $foundersIds = array(
                     1, // That's our co-founder, Kalo
                     7 // That's the other one, Stoyan
-                ];
+                );
                 // Our designers, have no posts, but display them
-                $designersIds = [
+                $designersIds = array(
                     17, // Petya
                     18 // Alex
-                ];
+                );
 
                 foreach ($foundersIds as $user_id) {
                     array_push(
