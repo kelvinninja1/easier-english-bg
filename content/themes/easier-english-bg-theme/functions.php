@@ -700,3 +700,16 @@ function ssl_srcset( $sources ) {
 }
 
 add_filter( 'wp_calculate_image_srcset', 'ssl_srcset' );
+
+
+/**
+ * Add a custom fields to the user contact methods, see:
+ * https://davidwalsh.name/add-profile-fields
+ */
+function modify_contact_methods($profile_fields) {
+    $profile_fields['img'] = 'Profile Image Url';
+
+    return $profile_fields;
+}
+
+add_filter('user_contactmethods', 'modify_contact_methods');
