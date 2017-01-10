@@ -1,6 +1,6 @@
 <?php
 
-$email_to = "easierenglish.bg@gmail.com";
+$email_to = "kaloyan.kosev@easierenglish.bg, kristiana.yakimova@easierenglish.bg, stoyan.panayotov@easierenglish.bg";
 $email_subject = "Изпратена молба за урок през EasierEnglish.BG";
 
 extract($_POST);
