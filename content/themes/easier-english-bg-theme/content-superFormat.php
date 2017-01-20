@@ -98,12 +98,13 @@
 
             <p class="pt">
                 PS: Можеш да се абонираш по мейл и да получаваш известие за всеки нов урок.<br />
-                Ако желаеш, <a id="show-email-signup" href="javascript:;">въведи мейла си тук</a>.
+                Ако желаеш, <a href="http://eepurl.com/9PaA1" target="_blank">въведи мейла си тук</a>.
             </p>
 
-            <div id="email-signup" class="highlight border-pill p hidden">
-                <?php mailchimpSF_signup_form(); ?>
-            </div>
+            <?php // @deprecated, since Mailchimp's plugin is AWFUL ?>
+            <?php // <div id="email-signup" class="highlight border-pill p hidden"> ?>
+                <?php // mailchimpSF_signup_form(); ?>
+            <?php // </div> ?>
 
 
         </div><!-- .entry-content -->
