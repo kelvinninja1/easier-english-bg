@@ -40,7 +40,10 @@ $(document).ready(function(){
 
 	/**
 	 * Toggle show/hide email signup form
+	 *
+	 * @deprecated, since Mailchimp's plugin is AWFUL
 	 */
+	/*
 	var $emailSignup = $('#email-signup');
 	$('#show-email-signup').on('click', function(){
 		$emailSignup
@@ -56,6 +59,7 @@ $(document).ready(function(){
 			});
 		}
 	});
+	*/
 
 
 	/**
