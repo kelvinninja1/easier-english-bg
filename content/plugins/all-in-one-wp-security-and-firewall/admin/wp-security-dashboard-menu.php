@@ -33,7 +33,7 @@ class AIOWPSecurity_Dashboard_Menu extends AIOWPSecurity_Admin_Menu
     function get_current_tab()
     {
         $tab_keys = array_keys($this->menu_tabs);
-        $tab = isset($_GET['tab']) ? $_GET['tab'] : $tab_keys[0];
+        $tab = isset($_GET['tab']) ? sanitize_text_field($_GET['tab']) : $tab_keys[0];
         return $tab;
     }
 
@@ -75,6 +75,17 @@ class AIOWPSecurity_Dashboard_Menu extends AIOWPSecurity_Admin_Menu
 
     function render_tab1()
     {
+	
+	//Lets check if reapply httaccess rules action was performed
+	if(strip_tags($_REQUEST['aiowps_reapply_htaccess']) == 1){
+	    //Show success or failure message from the reapply operation.
+	    if(isset($_SESSION['reapply_htaccess_rules_action_result']) && $_SESSION['reapply_htaccess_rules_action_result'] == '1'){
+		echo '<div class="updated"><p>The AIOWPS .htaccess rules were successfully re-inserted.</p></div>';
+	    } else if (isset($_SESSION['reapply_htaccess_rules_action_result']) && $_SESSION['reapply_htaccess_rules_action_result'] == '2'){
+		echo '<div class="error"><p>AIOWPS encountered an error when trying to write to your .htaccess file. Please check the logs.</p></div>';
+	    }
+	}
+	
         echo '<div class="aio_grey_box">';
         echo '<p>' . __('For information, updates and documentation, please visit the', 'all-in-one-wp-security-and-firewall') . ' <a href="https://www.tipsandtricks-hq.com/wordpress-security-and-firewall-plugin" target="_blank">' . __('AIO WP Security & Firewall Plugin', 'all-in-one-wp-security-and-firewall') . '</a> ' . __('Page', 'all-in-one-wp-security-and-firewall') . '</p>';
         echo '<p><a href="https://www.tipsandtricks-hq.com/development-center" target="_blank">' . __('Follow us', 'all-in-one-wp-security-and-firewall') . '</a> on ' . __('Twitter, Google+ or via Email to stay up to date about the new security features of this plugin.', 'all-in-one-wp-security-and-firewall') . '</p>';
@@ -641,15 +652,6 @@ class AIOWPSecurity_Dashboard_Menu extends AIOWPSecurity_Admin_Menu
                 <strong><?php _e('PHP Max Post Size', 'all-in-one-wp-security-and-firewall'); ?>
                     : </strong><code><?php echo $post_max; ?></code><br/>
                 <?php
-                if (ini_get('safe_mode')) {
-                    $safe_mode = __('On', 'all-in-one-wp-security-and-firewall');
-                } else {
-                    $safe_mode = __('Off', 'all-in-one-wp-security-and-firewall');
-                }
-                ?>
-                <strong><?php _e('PHP Safe Mode', 'all-in-one-wp-security-and-firewall'); ?>
-                    : </strong><code><?php echo $safe_mode; ?></code><br/>
-                <?php
                 if (ini_get('allow_url_fopen')) {
                     $allow_url_fopen = __('On', 'all-in-one-wp-security-and-firewall');
                 } else {
@@ -765,7 +767,7 @@ class AIOWPSecurity_Dashboard_Menu extends AIOWPSecurity_Admin_Menu
                     <input type="hidden" name="page" value="<?php echo esc_attr($_REQUEST['page']); ?>"/>
                     <?php
                     if (isset($_REQUEST["tab"])) {
-                        echo '<input type="hidden" name="tab" value="' . $_REQUEST["tab"] . '" />';
+                        echo '<input type="hidden" name="tab" value="' . esc_attr($_REQUEST["tab"]) . '" />';
                     }
                     ?>
                     <!-- Now we can render the completed list table -->
@@ -814,7 +816,7 @@ class AIOWPSecurity_Dashboard_Menu extends AIOWPSecurity_Admin_Menu
                     <?php
                     $blocked_ip_list->search_box('Search', 'search_permanent_block');
                     if (isset($_REQUEST["tab"])) {
-                        echo '<input type="hidden" name="tab" value="' . $_REQUEST["tab"] . '" />';
+                        echo '<input type="hidden" name="tab" value="' . esc_attr($_REQUEST["tab"]) . '" />';
                     }
                     ?>
                     <!-- Now we can render the completed list table -->
@@ -828,8 +830,9 @@ class AIOWPSecurity_Dashboard_Menu extends AIOWPSecurity_Admin_Menu
 
     function render_tab5()
     {
-        global $wpdb;
-        $file_selected = isset($_POST["aiowps_log_file"]) ? $_POST["aiowps_log_file"] : '';
+        global $aio_wp_security;
+        $file_selected = filter_input(INPUT_POST, 'aiowps_log_file'); // Get the selected file
+
         ?>
         <div class="postbox">
             <h3 class="hndle"><label
@@ -868,15 +871,23 @@ class AIOWPSecurity_Dashboard_Menu extends AIOWPSecurity_Admin_Menu
             </div>
         </div>
         <?php
-        if (isset($_POST['aiowps_view_logs']))//Do form submission tasks
+        if (isset($_POST['aiowps_view_logs']) && $file_selected)//Do form submission tasks
         {
-            $error = '';
+            //Check nonce before doing anything
             $nonce = $_REQUEST['_wpnonce'];
             if (!wp_verify_nonce($nonce, 'aiowpsec-dashboard-logs-nonce')) {
                 $aio_wp_security->debug_logger->log_debug("Nonce check failed on dashboard view logs!", 4);
-                die("Nonce check failed on dashboard view logs!");
+                wp_die("Error! Nonce check failed on dashboard view logs!");
             }
 
+            //Let's make sure that the file selected can only ever be the correct log file of this plugin.
+            $valid_aiowps_log_files = array('wp-security-log.txt', 'wp-security-log-cron-job.txt');
+            if(!in_array($file_selected, $valid_aiowps_log_files)){
+                $file_selected = '';
+                unset($_POST['aiowps_view_logs']);
+                wp_die(__('Error! The file you selected is not a permitted file. You can only view log files created by this plugin.','all-in-one-wp-security-and-firewall'));
+            }
+            
             if (!empty($file_selected)) {
                 ?>
                 <div class="postbox">
@@ -898,8 +909,7 @@ class AIOWPSecurity_Dashboard_Menu extends AIOWPSecurity_Admin_Menu
                             $log_contents = $file_selected . ': ' . __('Log file is empty!', 'all-in-one-wp-security-and-firewall');
                         }
                         ?>
-                        <textarea class="aio_text_area_file_output aio_half_width aio_spacer_10_tb" rows="15"
-                                  readonly><?php echo $log_contents; ?></textarea>
+                        <textarea class="aio_text_area_file_output aio_half_width aio_spacer_10_tb" rows="15" readonly><?php echo esc_textarea($log_contents); ?></textarea>
 
                     </div>
                 </div>
