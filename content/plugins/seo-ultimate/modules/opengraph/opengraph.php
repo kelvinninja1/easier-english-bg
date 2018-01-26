@@ -122,11 +122,7 @@ class SU_OpenGraph extends SU_Module {
 						$tags['og:description'] = $meta_desc;
 				
 				//URL
-				/**
-				 * Fixed: Force http to og:url,
-				 * otherwise, after moving to https, fb likes count is gone
-				 */
-				$tags['og:url'] = 'http://easierenglish.bg' . $_SERVER['REQUEST_URI'];
+				$tags['og:url'] = get_permalink($post->ID);
 				
 				//Image
 				$tags['og:image'] = $this->jlsuggest_value_to_url($this->get_postmeta('og_image'), true);
