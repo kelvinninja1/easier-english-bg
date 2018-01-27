@@ -108,40 +108,6 @@ a:hover {
     color: #222;
 }
 
-.background .breadcrumbs {
-    font-size: 12px;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    color: #111;
-    background-color: rgba(255, 255, 255, 0.8);
-    border-top: 1px solid #ddd;
-}
-.background .breadcrumbs .page_wrapper {
-    padding: 5px 0;
-}
-.background .breadcrumbs .page_wrapper:empty {
-    padding: 0;
-}
-.background .breadcrumbs a {
-    color: #000;
-    text-decoration: none;
-    padding: 0;
-    margin: 0 2px;
-}
-.background .breadcrumbs a:hover {
-    border-bottom: 1px solid #000;
-}
-.background .breadcrumbs .home {
-    margin-left: 20px;
-}
-@media screen and (min-width: 1380px) {
-    .background .breadcrumbs .home {
-        margin-left: 40px;
-    }
-}
-
 
 /* 3D Animated Anchor Tags */
 .roll {
@@ -2743,9 +2709,6 @@ html.mm-nooverflowscrolling.mm-opened {
     }
     .background .headings p {
         font-size: 130%;
-    }
-    .background .breadcrumbs {
-        display: none;
     }
 
     #respond form .comment-form-author,
