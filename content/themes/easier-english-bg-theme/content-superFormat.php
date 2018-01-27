@@ -101,12 +101,6 @@
                 Ако желаеш, <a href="http://eepurl.com/9PaA1" target="_blank">въведи мейла си тук</a>.
             </p>
 
-            <?php // @deprecated, since Mailchimp's plugin is AWFUL ?>
-            <?php // <div id="email-signup" class="highlight border-pill p hidden"> ?>
-                <?php // mailchimpSF_signup_form(); ?>
-            <?php // </div> ?>
-
-
         </div><!-- .entry-content -->
 
 
