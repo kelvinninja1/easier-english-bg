@@ -185,34 +185,6 @@ a:hover {
 }
 
 
-/* Mail Chilp */
-.mc_input {
-    width: 295px;
-    padding: 8px;
-    border-radius: 5px;
-    color: #555;
-    font-size: 100%;
-    margin-bottom: 10px;
-}
-.mc_input[type="email"] {
-    width: 270px;
-    padding: 8px 8px 8px 33px;
-    background: url(../img/email_icon.png) no-repeat 10px center #fff;
-}
-.mc_error_msg {
-    color: red;
-    margin-bottom: 10px;
-    display: block;
-}
-.mc_merge_var{
-    padding:0;
-    margin:0;
-}
-.mc_signup_submit {
-    padding-left: 2px;
-}
-
-
 body .site {
     margin: 10px auto 48px;
     position: relative;
@@ -748,7 +720,6 @@ button[disabled],
 input[disabled] {
     cursor: default;
 }
-#mc_signup_submit:hover,
 .menu-toggle:hover,
 button:hover,
 input[type="button"]:hover,
@@ -756,7 +727,6 @@ input[type="reset"]:hover,
 article.post-password-required input[type=submit]:hover {
     background-color: #388E3C;
 }
-#mc_signup_submit:active,
 .menu-toggle:active,
 .menu-toggle.toggled-on,
 button:active,
@@ -980,8 +950,6 @@ img.wp-smiley,
 
 .site-content {
     margin: 10px 0 0;
-    float: left;
-    width: 67%;
 }
 .site-content article.format-standard.post {
     border-radius: 3px;
@@ -2063,7 +2031,7 @@ hr {
 
 
 .team_card {
-    position: relative; 
+    position: relative;
 }
 .team_card img,
 .layout-authors .avatar {
@@ -2662,12 +2630,8 @@ html.mm-nooverflowscrolling.mm-opened {
 }
 
 @media screen and (max-width: 1280px){
-    .widget-area #s,
-    .mc_input[type="email"] {
+    .widget-area #s {
         width: 82%;
-    }
-    .mc_input {
-        width: 90%;
     }
 
     .wrapper,
@@ -2686,9 +2650,6 @@ html.mm-nooverflowscrolling.mm-opened {
     }
     body .site {
         max-width: 100%;
-    }
-    .mc_input {
-        width: 91%;
     }
     .widget_categories ul li:hover a:before {
         margin: 0 10px 0 3px;
@@ -2719,11 +2680,6 @@ html.mm-nooverflowscrolling.mm-opened {
         padding: 20px 0 0 0;
         border-left: none;
         border-top: 1px solid #DDD;
-    }
-    #mailchimpsf_widget-2,
-    #text-2,
-    #text-3 {
-        display: none;
     }
 }
 

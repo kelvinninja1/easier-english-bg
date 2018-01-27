@@ -24,7 +24,6 @@ elixir(function(mix) {
      */
     .scripts([
         'jquery.mmenu.min.js',
-        '../../../plugins/mailchimp/js/jquery.form.min.js',
 
         // Hiding your header until you need it
         '../../../lib/headroom.js/dist/headroom.js',
