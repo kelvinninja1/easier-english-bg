@@ -188,8 +188,7 @@ a:hover {
 body .site {
     margin: 10px auto 48px;
     position: relative;
-    border-left: 1px solid #DDD;
-    max-width: 90%;
+    max-width: 740px; /* I totally stole this magic value from Medium! */
 }
 
 
