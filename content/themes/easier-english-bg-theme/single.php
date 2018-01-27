@@ -15,7 +15,10 @@ get_header(); ?>
         if ( $enableExam == "true" ) {
     ?>
         <div id="exam_popup" class="examWrapper" style="display: none;">
-            <span id="close_exam" class="close_popup" title="Върни се към урока"></span>
+            <span id="close_exam" class="close_popup" title="Върни се към урока">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M13.427 3.021h-7.427v-3.021l-6 5.39 6 5.61v-3h7.427c3.071 0 5.561 2.356 5.561 5.427 0 3.071-2.489 5.573-5.561 5.573h-7.427v5h7.427c5.84 0 10.573-4.734 10.573-10.573s-4.733-10.406-10.573-10.406z"/></svg>
+                Назад към урока
+            </span>
             <h4>Упражнение<br /> <span>към урока за <?= the_title(); ?></span></h4>
 
             <div class="result"></div>
@@ -65,7 +68,7 @@ get_header(); ?>
 
             <dl id="questions_accordion" class="questions_holder">
                 <?php
-                    $questions = get_post_meta( $post->ID, 'questions', true ); 
+                    $questions = get_post_meta( $post->ID, 'questions', true );
                     $answers = get_post_meta( $post->ID, 'answers', true );
                     if ( strlen($questions[0]) > 0 ){
                         echo '<h3 class="widget-title">Зададени до момента въпроси към урока:</h3>';

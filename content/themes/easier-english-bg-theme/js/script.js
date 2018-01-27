@@ -37,31 +37,6 @@ $(document).ready(function(){
 		});
 	});
 
-
-	/**
-	 * Toggle show/hide email signup form
-	 *
-	 * @deprecated, since Mailchimp's plugin is AWFUL
-	 */
-	/*
-	var $emailSignup = $('#email-signup');
-	$('#show-email-signup').on('click', function(){
-		$emailSignup
-			.toggleClass('hidden')
-			.find('input[type=email]').focus();
-
-		// When the user opens the form, report it
-		if ($emailSignup.is(':visible')) {
-			ga('send', 'event', {
-				eventCategory: 'Subscription',
-				eventAction: 'open email signup form',
-				eventLabel: 'PS'
-			});
-		}
-	});
-	*/
-
-
 	/**
 	 * Show / hide header when user scrolls, see:
 	 * https://github.com/WickyNilliams/headroom.js
@@ -89,21 +64,29 @@ $(document).ready(function(){
 		$("#exam_popup").fadeOut();
 		//Remove # from url:
 		history.pushState("", document.title, window.location.pathname);
+
+		// Once the exam is ended - turn off the event to prevent back issues
+	    $(window).off('popstate');
 	});
-	$("#start_exam").on("click", function(){
-		parent.location.hash = "startExam";
+	$(".js-start_exam").on("click", function(){
+		window.history.pushState('startExam', null, './#startExam');
 		$("#exam_popup, .overlay").fadeIn(700);
 
 		//Scroll to top:
 		$('html, body').animate({
 			scrollTop: 0
 		}, 700);
+
+		// When user clicks the browser back button, hide the exam.
+	    $(window).on('popstate', function() {
+	    	$("#close_exam").trigger("click");
+	    });
 	});
 	$("body").prepend("<div class='overlay' style='display: none;'></div>");
 	$("#exam_popup").appendTo("body");
 
 	if( whereAmI() == "#startExam" ){
-		$("#start_exam").trigger("click");
+		$(".js-start_exam").trigger("click");
 	}
 
 	//Randomize question options:
@@ -122,7 +105,7 @@ $(document).ready(function(){
 	};
 	//Randomize answers:
 	$("#exam li").randomize("div.option");
-	
+
 	//Checkboxes:
 	$(".checkbox, .text").on("click", function(){
 		$(this).closest("li").find(".option").removeClass("active wrong correct");
@@ -241,7 +224,7 @@ $(document).ready(function(){
 	}
 
 	// Clears any fields in the form when the user clicks on them
-	$(":input").focus(function(){		
+	$(":input").focus(function(){
 	   if ($(this).hasClass("error") ) {
 			$(this).val("");
 			$(this).removeClass("error");
@@ -322,7 +305,7 @@ $(document).ready(function(){
 	/* Send a free question Form END */
 
 
-	/* 
+	/*
 	### Apply for Teacher Form START
 	*/
 	var teacherApply_div = $("#teacherApply_div");
@@ -360,7 +343,7 @@ $(document).ready(function(){
 		return false;
 	});
 
-	/* 
+	/*
 	### Apply for Teacher Form END
 	*/
 	teacherApply_div.hide();
