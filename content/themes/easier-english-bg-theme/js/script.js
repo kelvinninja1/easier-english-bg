@@ -64,6 +64,9 @@ $(document).ready(function(){
 		$("#exam_popup").fadeOut();
 		//Remove # from url:
 		history.pushState("", document.title, window.location.pathname);
+
+		// Once the exam is ended - turn off the event to prevent back issues
+	    $(window).off('popstate');
 	});
 	$(".js-start_exam").on("click", function(){
 		window.history.pushState('startExam', null, './#startExam');
@@ -73,6 +76,11 @@ $(document).ready(function(){
 		$('html, body').animate({
 			scrollTop: 0
 		}, 700);
+
+		// When user clicks the browser back button, hide the exam.
+	    $(window).on('popstate', function() {
+	    	$("#close_exam").trigger("click");
+	    });
 	});
 	$("body").prepend("<div class='overlay' style='display: none;'></div>");
 	$("#exam_popup").appendTo("body");
@@ -80,11 +88,6 @@ $(document).ready(function(){
 	if( whereAmI() == "#startExam" ){
 		$(".js-start_exam").trigger("click");
 	}
-
-	// When user clicks the browser back button, hide the exam.
-    $(window).on('popstate', function() {
-    	$("#close_exam").trigger("click");
-    });
 
 	//Randomize question options:
 	$.fn.randomize = function(childElem) {
