@@ -32,40 +32,64 @@
                 <img src="<?= $image ?>" class="article-author" height="80" width="80" alt="<?= $author_name; ?>" />
                 <?php if( isset($author_linkedin) ) echo '</a>'; ?>
                 <h1 class="entry-title"><?php the_title(); ?></h1>
-                <div class="reading-time">
+                <div class="reading-time entry-header-common-styles">
                 ... за прочитане си отдели около: <span class="info_value"><?php echo get_post_meta( $post->ID, 'completionTime', true ); ?> минути</span>
-                </div>
 
                 <?php
                     $enableExam =  get_post_meta( $post->ID, 'enableExam', true );
-                    if ( $enableExam == "true" ) {
+                    if ($enableExam == "true"):
                 ?>
-                    <button id="start_exam" class="slim_button startExam">Стартирай упражнение</button>
-                <?php
-                    }
-                ?>
+                    &nbsp;|&nbsp;
+                    <a class="js-start_exam" href="javascript:;">Стартирай упражнение</a>
+                    </div>
+                <?php endif; ?>
 
                 <div class="item_header_group" style="display: none;">Ниво на трудност: <span class="info_value"><?php echo get_post_meta( $post->ID, 'difficultyLevel', true ); ?></span></div>
             </div>
         </header>
 
         <div id="post_mainContent" class="entry-content">
+
             <?php the_content(); ?>
             <?php wp_link_pages( array( 'before' => '<div class="page-links">' . __( 'Pages:', 'twentytwelve' ), 'after' => '</div>' ) ); ?>
 
             <div class="pb">
-                <h4 class="question-form">Полезен ли ти беше урокът?</h4>
+                <h4 class="entry-content-sub-title">Упражнение</h4>
+
+                <?php
+                    $enableExam =  get_post_meta( $post->ID, 'enableExam', true );
+                    if ($enableExam == "true"):
+                ?>
+                    <p>Към този урок има разработено упражнение - 10 въпроса от затворен тип. Всеки въпрос има три възможни отговора, от които само един е верен (или най-верен).</p>
+                    <p>Всяко ново зареждане на страницата разбърква реда на възможните отговори.</p>
+                    <p>Когато стартирате упражнението, по всяко време можете да се върнете към урока. Въведените от вас отговори ще се запазят докато не презаредите или напуснете страницата.</p>
+                    <p>
+                        <button type="button" class="js-start_exam slim_button startExam">Стартирай упражнение</button>
+                    </p>
+                <?php else: ?>
+                    <p>Към този урок все още няма разработено упражнение.</p>
+                    <p>Споделяме безплатни уроци и пишем упражнения в свободното си време. Ние сме екип от доброволци. Опитваме поетапно да попълваме липсващите упражнения, но това става бавно. Не ни се сърди :-)</p>
+                    <p>Можеш <a href="/абонирай-се/">да се абонираш</a> за новостите около нас. Пишем всеки път когато публикуваме упражнение или нов урок.</p>
+                <?php endif; ?>
+
+                <h4 class="entry-content-sub-title">Полезен ли ти беше урокът?</h4>
                 <div id="feedback-btns-holder">
-                    <button id="positive-feedback" type="button" class="button">Да</button>
+                    <button id="positive-feedback" type="button" class="btn--default">Да</button>
                     <button id="negative-feedback" type="button" class="btn--default">Не</button>
                 </div>
 
                 <div id="social-box" class="highlight border-pill p hidden">
                     <p>
-                        Екип от доброволци отделя от свободното си време между 16 и 28 часа, за да подготви и публикува урок като този. Подкрепи ни, за да оцениш труда ни.
+                        За да подготвим и публикуваме урок като този, няколко доброволци отделят от свободното си време между 16 и 28 часа. Ако желаеш, подкрепи нашия проект, за да оцениш труда ни :-)
                     </p>
                     <p>
-                        Харесай урока:
+                        Подкрепи ни във Facebook:
+                        <div class="fb-page" data-href="https://www.facebook.com/easierenglish.bg/" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true">
+                            <blockquote cite="https://www.facebook.com/easierenglish.bg/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/easierenglish.bg/">ЕasiеrЕnglish.BG</a></blockquote>
+                        </div>
+                    </p>
+                    <p>
+                        или сподели урокът с твоите приятели:
                         <?php
                             /**
                              * Migrating urls to https breaks the fb like count :(
@@ -77,28 +101,18 @@
                         ?>
                         <div class="fb-like" data-href="<?= 'http://easierenglish.bg' . $_SERVER['REQUEST_URI'] ?>" data-layout="button_count" data-action="like" data-show-faces="false" data-share="false"></div>
                     </p>
-
-                    <p>
-                        Последвай ни в нашата фен страница:
-                        <div class="fb-page" data-href="https://www.facebook.com/easierenglish.bg/" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true">
-                            <blockquote cite="https://www.facebook.com/easierenglish.bg/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/easierenglish.bg/">ЕasiеrЕnglish.BG</a></blockquote>
-                        </div>
-                    </p>
+                    <p>Благодарим :-)</p>
                 </div>
                 <div id="suggestion-box" class="highlight border-pill p hidden">
                     <p>
-                        Съжаляваме, че сме те разочаровали :(
+                        Съжаляваме, че сме те разочаровали. Ще се радваме да <a href="/свържи-се-с-нас/">ни пишеш</a> какво можем да подобрим.
                     </p>
                     <img class="pb" src="https://media.giphy.com/media/dBHyy0gA87NTy/giphy.gif" alt="Giphy Fail Jump" />
-                    <p>
-                        Ще се радваме да <a href="/свържи-се-с-нас/">ни пишеш</a> какво можем да подобрим.
-                    </p>
                 </div>
             </div>
 
             <p class="pt">
-                PS: Можеш да се абонираш по мейл и да получаваш известие за всеки нов урок.<br />
-                Ако желаеш, <a href="http://eepurl.com/9PaA1" target="_blank">въведи мейла си тук</a>.
+                PS: Всеки, помогнал за реализацията на безплатните уроци, е доброволец и прави това в свободното си време. Ако желаеш, подкрепи труда на всички ни като <a target="_blank" href="https://www.facebook.com/easierenglish.bg">споделиш нашия проект с твоите приятели</a>. Благодарим! :-)
             </p>
 
         </div><!-- .entry-content -->
