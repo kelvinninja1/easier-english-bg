@@ -2493,20 +2493,18 @@ html.mm-nooverflowscrolling.mm-opened {
     margin-left: -415px;
 }
 .examWrapper .close_popup {
-    background: url(../img/close_icon.svg) #fff;
-    border-radius: 50%;
-    background-size: 40px 40px;
     width: 40px;
-    height: 40px;
+    padding: 5px;
     position: absolute;
-    top: -20px;
-    right: -20px;
+    top: -22px;
+    right: -55px;
     z-index: 5;
     cursor: pointer;
-    -webkit-transition: all 0.3s;
+    transition: all 0.2s;
+    border-radius: 3px;
 }
 .examWrapper .close_popup:hover {
-    -webkit-transform: rotate(360deg);
+    background-color: #CCC;
 }
 .examWrapper h4, .examWrapper .result {
     font-size: 150%;
@@ -2670,16 +2668,25 @@ html.mm-nooverflowscrolling.mm-opened {
     }
 }
 
+@media screen and (max-width: 965px){
+    .examWrapper .close_popup {
+        top: 5px;
+        right: 5px;
+        width: auto;
+        display: inline-block;
+    }
+    .examWrapper .close_popup svg {
+        display: inline-block;
+        vertical-align: middle;
+    }
+}
+
 @media screen and (max-width: 935px){
     .examWrapper {
         width: 98%;
         margin: 10px auto;
         left: 0;
         padding: 15px 0;
-    }
-    .examWrapper .close_popup {
-        top: -5px;
-        right: -5px;
     }
 }
 
