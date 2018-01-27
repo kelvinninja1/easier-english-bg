@@ -130,7 +130,11 @@
     <div class="headings page_wrapper">
         <h2 itemprop="description">Докъде ще стигнат твоите контакти и знания догодина,<br />
         ако владееш английски отлично?</h2>
-        <p>Обучавай се. Безплатно.</p>
+        <p class="big-p">Обучавай се. Безплатно.</p>
+        <br />
+        <form id="searchform" role="search" method="get" class="searchform" action="<?php echo home_url( '/' ); ?>">
+            <input type="text" value="" maxlength="100" name="s" id="s" placeholder="... потърси урок" />
+        </form>
     </div>
 </div>
 
