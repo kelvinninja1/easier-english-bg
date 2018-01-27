@@ -18,7 +18,7 @@
     <div class="page_wrapper group">
 
         <p class="footer_title">EasierEnglish.BG | Уроци по английски език</p>
-        <p class="footer_text">Всеки от екипа е допринасял безвъзмездно, за да осъществим заедно идеята за безплатни и достъпни уроци по английски език.<br />
+        <p class="footer_text">Всеки от екипа допринася безвъзмездно, за да осъществим заедно идеята за безплатни и достъпни уроци по английски език.<br />
         Ако желаеш да подкрепиш труда на всички ни - <a class="fancy-link" target="_blank" href="https://www.facebook.com/easierenglish.bg">сподели нашия проект</a> с твоите приятели. Благодарим предварително! :-)</p>
         <div class="footer-contacts-holder group">
             <div class="left">
