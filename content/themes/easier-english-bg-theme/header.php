@@ -20,7 +20,7 @@
     <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
 
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700%26subset=latin,cyrillic" />
-    <link rel="stylesheet" href="<?= get_template_directory_uri(); ?>/css/style.min.css" />
+    <link rel="stylesheet" href="<?= get_template_directory_uri(); ?>/css/style.min.css?v=1.6.0" />
 
     <link rel="shortcut icon" href="<?php bloginfo('template_url'); ?>/img/favicons/favicon.ico">
     <link rel="apple-touch-icon" sizes="57x57" href="<?php bloginfo('template_url'); ?>/img/favicons/apple-touch-icon-57x57.png">
