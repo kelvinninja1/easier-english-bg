@@ -45,7 +45,8 @@
 
 
 .page_wrapper {
-    width: 90%;
+    width: 100%;
+    max-width: 1000px;
     margin: 0 auto;
 }
 
@@ -171,13 +172,13 @@ body .site {
     transform: rotate(-325deg);
 }
 .social_bar {
-    width: 18%;
+    width: 10%;
     text-align: center;
     height: 80px;
 }
 /* Social Icons */
 .social_bar .socialIcon {
-    width: 25%;
+    width: 50%;
     float: left;
     font-size: 0;
     height: 50px;
@@ -196,7 +197,7 @@ body .site {
 .social_bar .socialIcon:hover svg {
     fill: #fff;
 }
-.social_bar .socialIcon:first-child:hover svg {
+.social_bar .socialIcon:nth-child(2):hover svg {
     transform: rotate(-360deg);
     -ms-transform: rotate(-360deg);
     -webkit-transform: rotate(-360deg);
@@ -216,7 +217,7 @@ body .site {
 /* Navigation Menu */
 .page_nav {
     text-align: center;
-    width: 66%;
+    width: 75%;
 }
 .nav-menu {
     display: inline-block !important;
@@ -923,15 +924,24 @@ img.wp-smiley,
 /* Header */
 .page_header {
     background-color: #fff;
-    background-color: rgba(255, 255, 255, 0.9);
+    background-color: rgba(255, 255, 255, 0.96);
     position: fixed;
     top: 0;
-    left: 0;
+    left: 50%;
+    margin-left: -500px;
     width: 100%;
-    border-bottom: 2px solid #a5a5a5;
+    max-width: 1000px;
+    border-bottom: 1px solid #a5a5a5;
+    border-left: 1px solid #a5a5a5;
+    border-right: 1px solid #a5a5a5;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
     height: 80px;
     z-index: 10;
     /*border-bottom: 2px solid #ACE1AF;*/
+}
+.page_header .page_wrapper {
+    width: 100%;
 }
 
 
@@ -2633,6 +2643,13 @@ html.mm-nooverflowscrolling.mm-opened {
     .social_bar {
         display: none;
     }
+    .page_header {
+        position: relative;
+        left: 0;
+        margin-left: 0;
+        border-left: 0;
+        border-right: 0;
+    }
     .page_nav {
         width: 84%;
     }
@@ -2664,10 +2681,6 @@ html.mm-nooverflowscrolling.mm-opened {
 
 /* Less than 768px */
 @media screen and (max-width: 760px){
-    .page_header {
-        position: static;
-    }
-
     .mobile_menu_button {
         display: block;
     }
