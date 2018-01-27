@@ -276,9 +276,11 @@ body .site {
     z-index: 15;
     width: 300px;
     background-color: rgba(255,255,255,.9);
-    border-bottom: 2px solid #a5a5a5;
-    border-left: 2px solid #a5a5a5;
-    border-right: 2px solid #a5a5a5;
+    border-bottom: 1px solid #a5a5a5;
+    border-left: 1px solid #a5a5a5;
+    border-right: 1px solid #a5a5a5;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
     transition: all 0.2s ease-out;
 }
 .nav-menu > li:nth-child(2):hover {
