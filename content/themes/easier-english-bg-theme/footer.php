@@ -21,24 +21,118 @@
         <div class="footer-contacts-holder group">
             <div class="left">
                 <div class="person-left-holder group">
-                    <img src="<?= get_template_directory_uri(); ?>/img/Kaloyan_Kosev_160.jpg" width="80" height="80" class="right" alt="Калоян Косев" />
+                    <img src="<?= get_template_directory_uri(); ?>/img/Kaloyan_Kosev_160.jpg" width="60" height="60" class="right" alt="Калоян Косев" />
                     <div class="right">
                         Калоян Косев,<br />
                         <a href="mailto:stoyan.panayotov@easierenglish.bg">kaloyan.kosev@easierenglish.bg</a><br />
-                        <a href="tel:+359883352972">+359 883 352 972</a>
                     </div>
                 </div>
             </div>
             <div class="right">
                 <div class="person-right-holder group">
-                    <img src="<?= get_template_directory_uri(); ?>/img/Stoyan_Panayotov_160.jpg" width="80" height="80" class="left" alt="Стоян Панайотов" />
+                    <img src="<?= get_template_directory_uri(); ?>/img/Stoyan_Panayotov_160.jpg" width="60" height="60" class="left" alt="Стоян Панайотов" />
                     <div class="left">
                         Стоян Панайотов,<br />
                         <a href="mailto:stoyan.panayotov@easierenglish.bg">stoyan.panayotov@easierenglish.bg</a><br />
-                        <a href="tel:+359883696905">+359 883 696 905</a>
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="footer-contacts-holder group">
+            <?php
+                /**
+                 * Important note!
+                 * This code is kind of duplicated a lot with the one
+                 * located in the team-page.php Sorry about that.
+                 */
+
+                /**
+                 * Build an array with all team members,
+                 * starting with the founders.
+                 */
+                $team_members = array();
+
+                // Mark these as special
+                $foundersIds = array(
+                    1, // That's our co-founder, Kalo
+                    7 // That's the other one, Stoyan
+                );
+                // Our designers, have no posts, but display them
+                $designersIds = array(
+                    17, // Petya
+                    18 // Alex
+                );
+
+                foreach ($foundersIds as $user_id) {
+                    array_push(
+                        $team_members,
+                        get_user_by('id', $user_id)
+                    );
+                }
+
+                $teachers_filter = array(
+                    'orderby'      => 'post_count',
+                    'order'        => 'DSC',
+                    'exclude'      => array_merge($foundersIds, $designersIds)
+                );
+                $all_teachers = get_users($teachers_filter);
+                $team_members = array_merge($team_members, $all_teachers);
+
+                foreach ($designersIds as $user_id) {
+                    array_push(
+                        $team_members,
+                        get_user_by('id', $user_id)
+                    );
+                }
+
+                foreach ($team_members as $user) {
+                    /**
+                     * Skip the generic team account and move on.
+                     * Sadly, he is not a real person :)
+                     */
+                    if ($user->user_email === 'team@easierenglish.bg') {
+                        continue;
+                    }
+
+                    /**
+                     * Skip teachers without any posts,
+                     * except the two founders + designers. They are special :D
+                     */
+                    $isUserFounder = in_array($user->ID, $foundersIds);
+                    if ($isUserFounder) {
+                        continue;
+                    }
+
+                    $isUserDesigner = in_array($user->ID, $designersIds);
+                    $user_posts_count = count_user_posts($user->ID);
+                    if (
+                        $user_posts_count == 0
+                        && ! $isUserFounder
+                        && ! $isUserDesigner
+                    ) {
+                       continue;
+                    }
+
+                    $user_name = esc_html($user->display_name);
+
+                    /**
+                     * Get teacher photo via the user profile custom field,
+                     * or fallback to a generic photo.
+                     */
+                    $template_url = get_bloginfo('template_directory');
+                    $profile_img = get_the_author_meta('profile-img', $user->ID);
+                    $image = $template_url . '/img/' .
+                        (empty($profile_img) ? 'team/generic.jpg' : $profile_img);
+
+                    // Linked-in URL
+                    if ($user->user_url) {
+                        echo '<a title="' . $user_name . ' в LinkedIn" href="' . $user->user_url . '" target="_blank"><img class="rounded-footer-image" src="' . $image . '" alt="' . $user_name . '" width="60" height="60" /></a>';
+                    } else {
+                        echo '<img class="rounded-footer-image" src="' . $image . '" alt="' . $user_name . '" width="60" height="60" />';
+                    }
+                }
+
+            ?>
         </div>
 
         <div class="footer-links">
