@@ -144,17 +144,7 @@
         ако владееш английски отлично?</h2>
         <p>Обучавай се. Безплатно.</p>
     </div>
-
-    <div id="breadcrumbs_holder" class="breadcrumbs">
-        <?php if( !is_front_page() && function_exists('bcn_display') ) { ?>
-            <div class="page_wrapper">
-                <?php bcn_display(); ?>
-            </div>
-         <?php } ?>
-    </div>
-
 </div>
 
 <div id="page" class="hfeed site">
     <div id="main" class="wrapper">
-
