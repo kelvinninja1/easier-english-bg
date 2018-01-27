@@ -166,15 +166,6 @@
     js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=195363947331773";
     fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));
-
-
-    //Google+ Badge and Google+ Button:
-    window.___gcfg = {lang: 'bg'};
-    (function() {
-    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-    po.src = 'https://apis.google.com/js/platform.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-    })();
 </script>
 
 </body>
