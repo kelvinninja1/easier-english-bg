@@ -17,14 +17,16 @@
 <footer class="page-footer">
     <div class="page_wrapper group">
 
-        <p class="footer_title">Въпроси? Свържи се с нас:</p>
+        <p class="footer_title">EasierEnglish.BG | Уроци по английски език</p>
+        <p class="footer_text">Всеки от екипа е допринасял безвъзмездно, за да осъществим заедно идеята за безплатни и достъпни уроци по английски език.<br />
+        Ако желаеш да подкрепиш труда на всички ни - <a class="fancy-link" target="_blank" href="https://www.facebook.com/easierenglish.bg">сподели нашия проект</a> с твоите приятели. Благодарим предварително! :-)</p>
         <div class="footer-contacts-holder group">
             <div class="left">
                 <div class="person-left-holder group">
                     <img src="<?= get_template_directory_uri(); ?>/img/Kaloyan_Kosev_160.jpg" width="60" height="60" class="right" alt="Калоян Косев" />
                     <div class="right">
                         Калоян Косев,<br />
-                        <a href="mailto:stoyan.panayotov@easierenglish.bg">kaloyan.kosev@easierenglish.bg</a><br />
+                        <a class="fancy-link" href="mailto:stoyan.panayotov@easierenglish.bg">kaloyan.kosev@easierenglish.bg</a><br />
                     </div>
                 </div>
             </div>
@@ -33,7 +35,7 @@
                     <img src="<?= get_template_directory_uri(); ?>/img/Stoyan_Panayotov_160.jpg" width="60" height="60" class="left" alt="Стоян Панайотов" />
                     <div class="left">
                         Стоян Панайотов,<br />
-                        <a href="mailto:stoyan.panayotov@easierenglish.bg">stoyan.panayotov@easierenglish.bg</a><br />
+                        <a class="fancy-link" href="mailto:stoyan.panayotov@easierenglish.bg">stoyan.panayotov@easierenglish.bg</a><br />
                     </div>
                 </div>
             </div>
@@ -136,11 +138,11 @@
         </div>
 
         <div class="footer-links">
-            <a itemprop="url" href="https://easierenglish.bg" title="Уроци по английски език | EasierEnglish.BG">EasierEnglish.BG</a> &copy; 2013 - <?php echo date("Y"); ?>
-            <a href="/мисия/">Мисия</a>
-            <a href="/партньори/">Партньори</a>
-            <a href="/свържи-се-с-нас/" title="Свържи се с нас">Контакти</a>
-            <a href="/feed/" target="_blank" title="Пълна RSS Емисия">RSS Емисия</a>
+            <a class="fancy-link" itemprop="url" href="https://easierenglish.bg" title="Уроци по английски език | EasierEnglish.BG">EasierEnglish.BG</a> &copy; 2013 - <?php echo date("Y"); ?>
+            <a class="fancy-link" href="/мисия/">Мисия</a>
+            <a class="fancy-link" href="/партньори/">Партньори</a>
+            <a class="fancy-link" href="/свържи-се-с-нас/" title="Свържи се с нас">Контакти</a>
+            <a class="fancy-link" href="/feed/" target="_blank" title="Пълна RSS Емисия">RSS Емисия</a>
         </div>
     </div>
 

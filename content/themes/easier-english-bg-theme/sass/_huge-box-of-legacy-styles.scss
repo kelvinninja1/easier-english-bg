@@ -1002,14 +1002,8 @@ section[role="banner"] {
     text-align: center;
     border-top: 2px solid #CCC;
 }
-.page-footer a {
-    color: #111;
-    text-decoration: none;
-    padding: 0;
-    transition: background-color 0.2s ease-out;
-}
-.page-footer a:hover {
-    background-color: #ACE1AF;
+.footer-links .fancy-link {
+    border-bottom: 0;
 }
 .footer-contacts-holder {
     padding: 10px 0;
@@ -1017,7 +1011,11 @@ section[role="banner"] {
 .page-footer .footer_title {
     line-height: 1.5;
     font-weight: 400;
-    text-transform: uppercase;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+.page-footer .footer_text {
+    line-height: 1.4;
 }
 .footer-contacts-holder .person-left-holder,
 .footer-contacts-holder .person-right-holder {
@@ -1284,6 +1282,7 @@ strong.fail {
     font-size: 105%;
     color: #fff;
 }
+.fancy-link,
 .entry-content a,
 .entry-header-common-styles a {
     padding: 0 2px;
@@ -1293,6 +1292,7 @@ strong.fail {
     transition: all 0.2s ease-out;
     text-decoration: none;
 }
+.fancy-link:hover,
 .entry-header-common-styles a:hover,
 .entry-content a:hover {
     background-color: #ACE1AF;
