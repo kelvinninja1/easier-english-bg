@@ -176,5 +176,14 @@
     }(document, 'script', 'facebook-jssdk'));
 </script>
 
+<script src="https://ajax.googleapis.com/ajax/libs/webfont/1.5.18/webfont.js"></script>
+<script>
+    WebFont.load({
+        google: {
+            families: ['Open Sans:300,400,600,700:latin,cyrillic']
+        }
+    });
+</script>
+
 </body>
 </html>
