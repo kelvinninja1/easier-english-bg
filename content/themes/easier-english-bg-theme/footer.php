@@ -23,7 +23,9 @@
         <div class="footer-contacts-holder group">
             <div class="left">
                 <div class="person-left-holder group">
-                    <img src="<?= get_template_directory_uri(); ?>/img/team/kaloyan-kosev_68.jpg" width="60" height="60" class="right" alt="Калоян Косев" />
+                    <a href="https://www.linkedin.com/in/superkalo" target="_blank">
+                        <img src="<?= get_template_directory_uri(); ?>/img/team/kaloyan-kosev_68.jpg" width="60" height="60" class="right" alt="Калоян Косев" />
+                    </a>
                     <div class="right">
                         Калоян Косев,<br />
                         <a class="fancy-link" href="mailto:stoyan.panayotov@easierenglish.bg">kaloyan.kosev@easierenglish.bg</a><br />
@@ -32,7 +34,9 @@
             </div>
             <div class="right">
                 <div class="person-right-holder group">
-                    <img src="<?= get_template_directory_uri(); ?>/img/team/stoyan-panayotov_68.jpg" width="60" height="60" class="left" alt="Стоян Панайотов" />
+                    <a href="https://www.linkedin.com/in/stpanayotov" target="_blank">
+                        <img src="<?= get_template_directory_uri(); ?>/img/team/stoyan-panayotov_68.jpg" width="60" height="60" class="left" alt="Стоян Панайотов" />
+                    </a>
                     <div class="left">
                         Стоян Панайотов,<br />
                         <a class="fancy-link" href="mailto:stoyan.panayotov@easierenglish.bg">stoyan.panayotov@easierenglish.bg</a><br />
