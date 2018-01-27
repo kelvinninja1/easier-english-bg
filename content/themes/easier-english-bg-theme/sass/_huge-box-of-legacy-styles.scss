@@ -1095,7 +1095,7 @@ section[role="banner"] {
     margin-bottom: 30px;
 }
 .inside_articleBox .entry-title {
-    margin-bottom: 5px;
+    margin-bottom: 10px;
 }
 .entry-header .entry-title a {
     text-decoration: none;
@@ -1283,7 +1283,8 @@ strong.fail {
     font-size: 105%;
     color: #fff;
 }
-.entry-content a {
+.entry-content a,
+.entry-header-common-styles a {
     padding: 0 2px;
     border-bottom: 1px solid #ACE1AF;
     font-weight: 400;
@@ -1291,6 +1292,7 @@ strong.fail {
     transition: all 0.2s ease-out;
     text-decoration: none;
 }
+.entry-header-common-styles a:hover,
 .entry-content a:hover {
     background-color: #ACE1AF;
     color: #000;

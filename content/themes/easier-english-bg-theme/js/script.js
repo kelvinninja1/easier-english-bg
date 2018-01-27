@@ -65,7 +65,7 @@ $(document).ready(function(){
 		//Remove # from url:
 		history.pushState("", document.title, window.location.pathname);
 	});
-	$("#start_exam").on("click", function(){
+	$(".js-start_exam").on("click", function(){
 		parent.location.hash = "startExam";
 		$("#exam_popup, .overlay").fadeIn(700);
 
@@ -78,7 +78,7 @@ $(document).ready(function(){
 	$("#exam_popup").appendTo("body");
 
 	if( whereAmI() == "#startExam" ){
-		$("#start_exam").trigger("click");
+		$(".js-start_exam").trigger("click");
 	}
 
 	//Randomize question options:
