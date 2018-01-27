@@ -89,7 +89,7 @@
                         </div>
                     </p>
                     <p>
-                        или сподели урокът с твоите приятели:
+                        или сподели урока с твоите приятели:
                         <?php
                             /**
                              * Migrating urls to https breaks the fb like count :(
