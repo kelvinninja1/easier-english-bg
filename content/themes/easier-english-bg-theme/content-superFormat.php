@@ -32,29 +32,43 @@
                 <img src="<?= $image ?>" class="article-author" height="80" width="80" alt="<?= $author_name; ?>" />
                 <?php if( isset($author_linkedin) ) echo '</a>'; ?>
                 <h1 class="entry-title"><?php the_title(); ?></h1>
-                <div class="reading-time">
+                <div class="reading-time entry-header-common-styles">
                 ... за прочитане си отдели около: <span class="info_value"><?php echo get_post_meta( $post->ID, 'completionTime', true ); ?> минути</span>
-                </div>
 
                 <?php
                     $enableExam =  get_post_meta( $post->ID, 'enableExam', true );
-                    if ( $enableExam == "true" ) {
+                    if ($enableExam == "true"):
                 ?>
-                    <button id="start_exam" class="slim_button startExam">Стартирай упражнение</button>
-                <?php
-                    }
-                ?>
+                    &nbsp;|&nbsp;
+                    <a class="js-start_exam" href="javascript:;">Стартирай упражнение</a>
+                    </div>
+                <?php endif; ?>
 
                 <div class="item_header_group" style="display: none;">Ниво на трудност: <span class="info_value"><?php echo get_post_meta( $post->ID, 'difficultyLevel', true ); ?></span></div>
             </div>
         </header>
 
         <div id="post_mainContent" class="entry-content">
+
             <?php the_content(); ?>
             <?php wp_link_pages( array( 'before' => '<div class="page-links">' . __( 'Pages:', 'twentytwelve' ), 'after' => '</div>' ) ); ?>
 
             <div class="pb">
-                <h4 class="question-form">Полезен ли ти беше урокът?</h4>
+                <h4 class="entry-content-sub-title">Упражнение</h4>
+
+                <?php
+                    $enableExam =  get_post_meta( $post->ID, 'enableExam', true );
+                    if ($enableExam == "true"):
+                ?>
+                    <p>Към този урок има разработено упражнение.</p>
+                    <button class="js-start_exam slim_button startExam">Стартирай упражнение</button>
+                <?php else: ?>
+                    <p>Към този урок все още няма разработено упражнение.</p>
+                    <p>Споделяме безплатни уроци и пишем упражнения в свободното си време. Ние сме екип от доброволци. Опитваме поетапно да попълваме липсващите упражнения, но това става бавно. Не ни се сърди :-)</p>
+                    <p>Можеш да <a href="https://www.facebook.com/easierenglish.bg">следиш новостите около нас</a>. Пишем всеки път когато публикуваме упражнение или нов урок.</p>
+                <?php endif; ?>
+
+                <h4 class="entry-content-sub-title">Полезен ли ти беше урокът?</h4>
                 <div id="feedback-btns-holder">
                     <button id="positive-feedback" type="button" class="button">Да</button>
                     <button id="negative-feedback" type="button" class="btn--default">Не</button>

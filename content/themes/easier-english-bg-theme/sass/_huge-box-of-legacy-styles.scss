@@ -1179,14 +1179,14 @@ article.sticky .featured-post {
     line-height: 1.61;
 }
 .entry-content h2,
-.entry-content .question-form,
+.entry-content .entry-content-sub-title,
 .comment-content h2,
 .mu_register h2 {
     font-size: 25px;
     line-height: 1.61;
     font-weight: 400;
 }
-.entry-content .question-form:before {
+.entry-content .entry-content-sub-title:before {
     margin-top: 15px;
     display: none;
 }
