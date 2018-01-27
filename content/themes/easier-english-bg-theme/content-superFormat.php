@@ -101,12 +101,9 @@
                 </div>
                 <div id="suggestion-box" class="highlight border-pill p hidden">
                     <p>
-                        Съжаляваме, че сме те разочаровали :(
+                        Съжаляваме, че сме те разочаровали. Ще се радваме да <a href="/свържи-се-с-нас/">ни пишеш</a> какво можем да подобрим.
                     </p>
                     <img class="pb" src="https://media.giphy.com/media/dBHyy0gA87NTy/giphy.gif" alt="Giphy Fail Jump" />
-                    <p>
-                        Ще се радваме да <a href="/свържи-се-с-нас/">ни пишеш</a> какво можем да подобрим.
-                    </p>
                 </div>
             </div>
 
