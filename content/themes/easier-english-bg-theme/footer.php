@@ -23,7 +23,7 @@
         <div class="footer-contacts-holder group">
             <div class="left">
                 <div class="person-left-holder group">
-                    <img src="<?= get_template_directory_uri(); ?>/img/Kaloyan_Kosev_160.jpg" width="60" height="60" class="right" alt="Калоян Косев" />
+                    <img src="<?= get_template_directory_uri(); ?>/img/team/kaloyan-kosev_68.jpg" width="60" height="60" class="right" alt="Калоян Косев" />
                     <div class="right">
                         Калоян Косев,<br />
                         <a class="fancy-link" href="mailto:stoyan.panayotov@easierenglish.bg">kaloyan.kosev@easierenglish.bg</a><br />
@@ -32,7 +32,7 @@
             </div>
             <div class="right">
                 <div class="person-right-holder group">
-                    <img src="<?= get_template_directory_uri(); ?>/img/Stoyan_Panayotov_160.jpg" width="60" height="60" class="left" alt="Стоян Панайотов" />
+                    <img src="<?= get_template_directory_uri(); ?>/img/team/stoyan-panayotov_68.jpg" width="60" height="60" class="left" alt="Стоян Панайотов" />
                     <div class="left">
                         Стоян Панайотов,<br />
                         <a class="fancy-link" href="mailto:stoyan.panayotov@easierenglish.bg">stoyan.panayotov@easierenglish.bg</a><br />
@@ -123,6 +123,10 @@
                      */
                     $template_url = get_bloginfo('template_directory');
                     $profile_img = get_the_author_meta('profile-img', $user->ID);
+
+                    // Use optimized thumbnail
+                    $profile_img = substr_replace($profile_img, '_68.jpg', -4);
+
                     $image = $template_url . '/img/' .
                         (empty($profile_img) ? 'team/generic.jpg' : $profile_img);
 
