@@ -66,7 +66,7 @@ $(document).ready(function(){
 		history.pushState("", document.title, window.location.pathname);
 	});
 	$(".js-start_exam").on("click", function(){
-		parent.location.hash = "startExam";
+		window.history.pushState('startExam', null, './#startExam');
 		$("#exam_popup, .overlay").fadeIn(700);
 
 		//Scroll to top:
@@ -80,6 +80,11 @@ $(document).ready(function(){
 	if( whereAmI() == "#startExam" ){
 		$(".js-start_exam").trigger("click");
 	}
+
+	// When user clicks the browser back button, hide the exam.
+    $(window).on('popstate', function() {
+    	$("#close_exam").trigger("click");
+    });
 
 	//Randomize question options:
 	$.fn.randomize = function(childElem) {
