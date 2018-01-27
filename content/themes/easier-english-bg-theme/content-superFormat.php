@@ -76,10 +76,16 @@
 
                 <div id="social-box" class="highlight border-pill p hidden">
                     <p>
-                        Екип от доброволци отделя от свободното си време между 16 и 28 часа, за да подготви и публикува урок като този. Подкрепи ни, за да оцениш труда ни.
+                        За да подготвим и публикуваме урок като този, няколко доброволци отделят от свободното си време между 16 и 28 часа. Ако желаеш, подкрепи нашия проект, за да оцениш труда ни :-)
                     </p>
                     <p>
-                        Харесай урока:
+                        Подкрепи ни във Facebook:
+                        <div class="fb-page" data-href="https://www.facebook.com/easierenglish.bg/" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true">
+                            <blockquote cite="https://www.facebook.com/easierenglish.bg/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/easierenglish.bg/">ЕasiеrЕnglish.BG</a></blockquote>
+                        </div>
+                    </p>
+                    <p>
+                        или сподели урокът с твоите приятели:
                         <?php
                             /**
                              * Migrating urls to https breaks the fb like count :(
@@ -91,13 +97,7 @@
                         ?>
                         <div class="fb-like" data-href="<?= 'http://easierenglish.bg' . $_SERVER['REQUEST_URI'] ?>" data-layout="button_count" data-action="like" data-show-faces="false" data-share="false"></div>
                     </p>
-
-                    <p>
-                        Последвай ни в нашата фен страница:
-                        <div class="fb-page" data-href="https://www.facebook.com/easierenglish.bg/" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true">
-                            <blockquote cite="https://www.facebook.com/easierenglish.bg/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/easierenglish.bg/">ЕasiеrЕnglish.BG</a></blockquote>
-                        </div>
-                    </p>
+                    <p>Благодарим :-)</p>
                 </div>
                 <div id="suggestion-box" class="highlight border-pill p hidden">
                     <p>
